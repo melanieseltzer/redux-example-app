@@ -1,7 +1,14 @@
+import { connect } from 'react-redux';
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { addUser } from '../actions';
 
-const AddUser = () => {
+const AddUser = ({ addTheUser }) => {
   const [user, setUser] = useState('');
+
+  const handleAddUser = () => {
+    addTheUser(user);
+  };
 
   return (
     <section>
@@ -14,11 +21,18 @@ const AddUser = () => {
         />
       </label>
 
-      <button type="button" onClick={() => alert(`added: ${user}`)}>
+      <button type="button" onClick={handleAddUser}>
         Add
       </button>
     </section>
   );
 };
 
-export default AddUser;
+AddUser.propTypes = {
+  addTheUser: PropTypes.func.isRequired
+};
+
+const mapDispatchToProps = {
+  addTheUser: addUser
+};
+export default connect(null, mapDispatchToProps)(AddUser);
