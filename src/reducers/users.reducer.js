@@ -9,7 +9,10 @@ export default (state = initialState, action) => {
 
   switch(action.type) {
     case ADD_USER:
-      return [...state.users.names, payload];
+      return {
+        ...state,
+        names: [...state.names, payload]
+      };
     default:
       return state;
   }

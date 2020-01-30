@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -11,13 +12,15 @@ const StyledHeader = styled.header`
   padding: 40px;
 `;
 
-const Header = () => (
+const Header = ({totalUsers}) => (
   <StyledHeader>
     <h1>Sick App!</h1>
 
-    <div>Total Users:</div>
-    {/* Display how many users have been added */}
+    <div>Total Users: {totalUsers}</div>
   </StyledHeader>
 );
 
-export default Header;
+const mapStateToProps = state => ({
+  totalUsers: state.users.names.length
+});
+export default connect(mapStateToProps)(Header);
